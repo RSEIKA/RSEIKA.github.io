@@ -1,7 +1,7 @@
 //if(!sessionStorage.getItem('initialized')){
-	localStorage.setItem("bit",0);
-	localStorage.setItem("score",0);
-	sessionStorage.setItem('initialized','true');
+	//localStorage.setItem("bit",0);
+	//localStorage.setItem("score",0);
+	//sessionStorage.setItem('initialized','true');
 //}
 //let bit = Number(localStorage.getItem("bit") ?? 0);
 const marker01 = document.querySelector('#marker01');
@@ -13,8 +13,8 @@ const ab2 = document.querySelector('#ab2');
 const ab3 = document.querySelector('#ab3');
 const ab4 = document.querySelector('#ab4');
 
-// localStorage.setItem("bit",0);
-// localStorage.setItem("score",0);
+ localStorage.setItem("bit",0);
+ localStorage.setItem("score",0);
 // localStorage.setItem("bit",0);
 
 function setButtonState(button, isActive) {
