@@ -3,7 +3,7 @@ if (!sessionStorage.getItem('initialized')) {
   localStorage.setItem("score", 0);
   sessionStorage.setItem('initialized', 'true');
 }
-let bit = Number(localStorage.getItem("bit") ?? 0);
+//let bit = Number(localStorage.getItem("bit") ?? 0);
 const marker01 = document.querySelector('#marker01');
 const marker02 = document.querySelector('#marker02');
 const marker03 = document.querySelector('#marker03');
