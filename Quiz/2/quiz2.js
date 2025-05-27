@@ -130,4 +130,4 @@ function showResult() {
   }*/
 
 // クイズ開始
-//initQuiz();
+initQuiz();
