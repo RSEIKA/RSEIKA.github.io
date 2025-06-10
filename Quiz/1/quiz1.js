@@ -116,7 +116,7 @@ function showResult() {
 	document.getElementById("answer-section").style.display = "none";
 	document.getElementById("final-result").style.display = "block";
 
-	const percentage = (score / currentQuiz.length) * 100;
+	const percentage = (score / totalQuestions) * 100;
 	document.getElementById("score").textContent = `正解数: ${score}/${
 		currentQuiz.length
 	} (${percentage.toFixed(2)}%)`;
