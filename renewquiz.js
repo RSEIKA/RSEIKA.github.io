@@ -1,6 +1,8 @@
 if (!sessionStorage.getItem('initialized')) {
   localStorage.setItem("bit", 0);
   localStorage.setItem("score", 0);
+  localStorage.setItem("totalQuestion",4);
+  localStorage.setItem("AnserQuestion",0);
   sessionStorage.setItem('initialized', 'true');
 }
 //let bit = Number(localStorage.getItem("bit") ?? 0);
