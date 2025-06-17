@@ -28,8 +28,10 @@ let currentQuiz = quizData; // 全問題をそのまま使用
 let currentQuestion = 0;
 let test = localStorage.getItem("score") || 0;
 let score = Number(test);
-const totalQuestions = quizData.length;
-document.getElementById("total-questions").textContent = totalQuestions;
+let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
+let AnserQuestion = Number(CharAnserQuestion);
+const totalQuestion = localStorage.getItem("totalQuestion");
+document.getElementById("total-questions").textContent = AnserQuestion+1;
 
 // 初期化
 function initQuiz() {
@@ -78,14 +80,18 @@ function checkAnswer(selected, questionData) {
 	if (selected === questionData.correct) {
 		resultText.innerHTML = "<span class='correct'>正解！</span>";
 		score++;
+		AnserQuestion++;
 		localStorage.setItem("score", score);
+		localStorage.setItem("AnserQuestion",AnserQuestion);
 		let test1 = localStorage.getItem("bit") || 0;
 		let bit = Number(test1);
 		bit = bit+4;
 		localStorage.setItem("bit", bit);
 	} else {
 		resultText.innerHTML = "<span class='wrong'>不正解です。</span>";
+		AnserQuestion++;
 		localStorage.setItem("score", score);
+		localStorage.setItem("AnserQuestion",AnserQuestion);
 		let test1 = localStorage.getItem("bit") || 0;
 		let bit = Number(test1);
 		bit = bit+4;
@@ -116,10 +122,8 @@ function showResult() {
 	document.getElementById("answer-section").style.display = "none";
 	document.getElementById("final-result").style.display = "block";
 
-	const percentage = (score / currentQuiz.length) * 100;
-	document.getElementById("score").textContent = `正解数: ${score}/${
-		currentQuiz.length
-	} (${percentage.toFixed(2)}%)`;
+	const percentage = (score / totalQuestion) * 100;
+	document.getElementById("score").textContent = `正解数: ${score}/${totalQuestion} (${percentage.toFixed(2)}%)`;
 }
 
 // もう一度遊ぶ
