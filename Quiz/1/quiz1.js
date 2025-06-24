@@ -92,10 +92,6 @@ function checkAnswer(selected, questionData) {
 		AnserQuestion++;
 		localStorage.setItem("score", score);
 		localStorage.setItem("AnserQuestion",AnserQuestion);
-		let test1 = localStorage.getItem("bit") || 0;
-		let bit = Number(test1);
-		bit = bit+1;
-		localStorage.setItem("bit", bit);
 	}
 
 	// 最終問題かどうかのチェック

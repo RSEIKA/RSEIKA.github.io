@@ -5,7 +5,6 @@ if (!sessionStorage.getItem('initialized')) {
   localStorage.setItem("AnserQuestion",0);
   sessionStorage.setItem('initialized', 'true');
 }
-//let bit = Number(localStorage.getItem("bit") ?? 0);
 const marker01 = document.querySelector('#marker01');
 const marker02 = document.querySelector('#marker02');
 const marker03 = document.querySelector('#marker03');
@@ -34,6 +33,7 @@ marker01.addEventListener('markerFound', () => {
   if(checkanswered(1,bit)){}
   else{
   setButtonState(ab1, true);
+  window.location.href = './Quiz/1/Quiz1.html'
   }
 });
 
@@ -41,6 +41,7 @@ marker02.addEventListener('markerFound', () => {
   if(checkanswered(2,bit)){}
   else{
   setButtonState(ab2, true);
+  window.location.href = './Quiz/2/Quiz2.html'
   }
 });
 
@@ -48,6 +49,7 @@ marker03.addEventListener('markerFound', () => {
   if(checkanswered(3,bit)){}
   else{
   setButtonState(ab3, true);
+  window.location.href = './Quiz/3/Quiz3.html'
   }
 });
 
@@ -55,8 +57,11 @@ marker04.addEventListener('markerFound', () => {
   if(checkanswered(4,bit)){}
   else{
   setButtonState(ab4, true);
+  window.location.href = './Quiz/4/Quiz4.html'
   }
 });
+
+
 
 //答えてるか関数
 function checkanswered(qn,bit){
