@@ -115,6 +115,24 @@
         width: 360px;
         height: 360px;
       }
+      #answeredCount {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        top: 100px;  /* ← スコア表示の下 */
+        right: 10px;
+        width: 90px;
+        height: 70px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+}
+      
     </style>
   </head>
 
@@ -123,6 +141,10 @@
     <div id="score">
       <div>Score<br><span id="scoreValue"></span></div>
     </div>
+    <!-- 回答数の表示 -->
+    <div id="answeredCount">
+   <div>Answer<br><span id="answeredValue"></span></div>
+   </div>
 
     <script>
       // ローカルストレージからスコアを読み込んで表示
@@ -131,6 +153,10 @@
         if (savedScore !== null) {
           document.getElementById('scoreValue').textContent = savedScore;
         }
+         const answered = localStorage.getItem('AnserQuestion');
+    if (answered !== null) {
+      document.getElementById('answeredValue').textContent = answered + ' / ' + localStorage.getItem('totalQuestion');
+    }
       };
 
       // スコアをローカルストレージに保存
