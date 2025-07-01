@@ -1,26 +1,37 @@
 const quizData = [
 	{
-		question: "戦国時代に最初に「天下布武」を掲げた人物は誰？",
+		question: "[土佐打刃物タンちゃん]タンちゃんは高知の伝統工芸品のなにをモチーフにしているかな？",
 		choices: [
-			{ text: "織田信長" },
-			{ text: "豊臣秀吉" },
-			{ text: "徳川家康" },
-			{ text: "上杉謙信" },
+			{ text: "土佐打刃物" },
+			{ text: "土佐和紙" },
+			{ text: "土佐珊瑚" },
+			{ text: "土佐備長炭" },
 		],
 		correct: 0,
 	},
-	/*
+	
     {
-      question: "江戸幕府の初代将軍は誰ですか？",
+      question: "[フラフラ フラくん]フラくんは何をモチーフにしているかな",
       choices: [
-        { text: "織田信長" },
-        { text: "豊臣秀吉" },
-        { text: "徳川家康" },
-        { text: "武田信玄" },
+        { text: "フラフ" },
+        { text: "フランクフルト" },
+        { text: "フラフープ"},
+        { text: "フラミンゴ" },
+      ],
+      correct: 0,
+    },
+    
+    {
+      question: "[あじさいひめ]あじさいひめはなにをモチーフにしているかな？",
+      choices: [
+        { text: "ひまわりロード" },
+        { text: "あさがおロード" },
+        { text: "あじさいロード"},
+        { text: "ゆりロード" },
       ],
       correct: 2,
     },
-    */
+	
 	// 他の問題もここに追加
 ];
 
@@ -30,6 +41,7 @@ let Charscore = localStorage.getItem("score") || 0;
 let score = Number(Charscore);
 let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
 let AnserQuestion = Number(CharAnserQuestion);
+let Right = 0;
 const totalQuestion = localStorage.getItem("totalQuestion");
 document.getElementById("total-questions").textContent = AnserQuestion+1;
 
@@ -79,30 +91,33 @@ function checkAnswer(selected, questionData) {
 	// 正解・不正解のメッセージ表示
 	if (selected === questionData.correct) {
 		resultText.innerHTML = "<span class='correct'>正解！</span>";
-		score++;
-		AnserQuestion++;
-		localStorage.setItem("score", score);
-		localStorage.setItem("AnserQuestion",AnserQuestion);
-		let test1 = localStorage.getItem("bit") || 0;
-		let bit = Number(test1);
-		bit = bit+1;
-		localStorage.setItem("bit", bit);
+		//score++;
+		Right++;
+		//localStorage.setItem("score", score);
+
 	} else {
 		resultText.innerHTML = "<span class='wrong'>不正解です。</span>";
 		localStorage.setItem("score", score);
 	}
-
+	currentQuestion++;
 	// 最終問題かどうかのチェック
 	if (currentQuestion === currentQuiz.length) {
+		if(Right === currentQuiz.length){
+			AnserQuestion++;
+			localStorage.setItem("AnserQuestion",AnserQuestion);
+			let test1 = localStorage.getItem("bit") || 0;
+			let bit = Number(test1);
+			bit = bit+1;
+			localStorage.setItem("bit", bit);
+		}
 		document.getElementById("next-question").textContent = "結果を見る";
 	} else {
-		document.getElementById("next-question").textContent = "ARに戻る";
+		document.getElementById("next-question").textContent = "次の問題";
 	}
 }
 
 // 次の問題へ
 function nextQuestion() {
-	currentQuestion++;
 	if (currentQuestion < currentQuiz.length) {
 		loadQuestion();
 		document.getElementById("container").scrollIntoView({ behavior: "smooth" }); // containerにスクロール
@@ -116,8 +131,8 @@ function showResult() {
 	document.getElementById("answer-section").style.display = "none";
 	document.getElementById("final-result").style.display = "block";
 
-	const percentage = (score / totalQuestion) * 100;
-	document.getElementById("score").textContent = `正解数: ${score}/${totalQuestion} (${percentage.toFixed(2)}%)`;
+	const percentage = (Right / currentQuiz.length) * 100;
+	document.getElementById("score").textContent = `正解数: ${Right}/${currentQuiz.length} (${percentage.toFixed(2)}%)`;
 }
 
 // もう一度遊ぶ
