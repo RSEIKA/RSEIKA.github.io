@@ -89,9 +89,7 @@ function checkAnswer(selected, questionData) {
 		localStorage.setItem("bit", bit);
 	} else {
 		resultText.innerHTML = "<span class='wrong'>不正解です。</span>";
-		AnserQuestion++;
 		localStorage.setItem("score", score);
-		localStorage.setItem("AnserQuestion",AnserQuestion);
 
 	}
 
