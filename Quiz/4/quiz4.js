@@ -1,26 +1,37 @@
 const quizData = [
 	{
-		question: "毘沙門天を深く信仰し、自らを「毘沙門天の生まれ変わり」と称したのは誰？",
+		question: "[しょうがちゃん]しょうがちゃんは、なに系アイドル？",
 		choices: [
-			{ text: "織田信長" },
-			{ text: "豊臣秀吉" },
-			{ text: "徳川家康" },
-			{ text: "上杉謙信" },
+			{ text: "ツンデレ系" },
+			{ text: "清楚系" },
+			{ text: "地下茎" },
+			{ text: "王道系" },
 		],
-		correct: 3,
+		correct: 2,
 	},
-	/*
+	
     {
-      question: "江戸幕府の初代将軍は誰ですか？",
+      question: "[しょうが地蔵]しょうが地蔵はある一言でこころのとげを抜いてくれるんだ。どんな一言かな？",
       choices: [
-        { text: "織田信長" },
-        { text: "豊臣秀吉" },
-        { text: "徳川家康" },
-        { text: "武田信玄" },
+        { text: "ありがとう" },
+        { text: "だいすき" },
+        { text: "愛してる" },
+        { text: "ごめん" },
       ],
-      correct: 2,
+      correct: 3,
     },
-    */
+
+	{
+      question: "[ありがとう駅のせんべちゃん]せんべちゃんはやなせたかし先生のアドバイスから生まれた煎餅がモチーフなんだ　次のうちどれかな？",
+      choices: [
+        { text: "ごめん煎餅" },
+        { text: "ありがとう煎餅" },
+        { text: "おろししょうが煎餅" },
+        { text: "豚の生姜焼き煎餅" },
+      ],
+      correct: 1,
+    },
+    
 	// 他の問題もここに追加
 ];
 
@@ -31,7 +42,7 @@ let score = Number(Charscore);
 let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
 let AnserQuestion = Number(CharAnserQuestion);
 let Right = 0;
-let QuizNumber = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+let QuizNumber = [0,1,2];
 let i = 0;
 const Questions = 3;
 const totalQuestion = localStorage.getItem("totalQuestion");
