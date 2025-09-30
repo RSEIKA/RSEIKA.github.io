@@ -1,13 +1,13 @@
 const quizData = [
 	{
-		question: "幼少期、今川義元のもとで人質として過ごしたのは誰？",
+		question: "[カミーティア]夜に見える星はどれくらい明るく光っているかによって等級が変わるんだ一番上の等級は次のうちどれかな？",
 		choices: [
-			{ text: "織田信長" },
-			{ text: "豊臣秀吉" },
-			{ text: "徳川家康" },
-			{ text: "上杉謙信" },
+			{ text: "1等星" },
+			{ text: "2等星" },
+			{ text: "6等星" },
+			{ text: "0等星" },
 		],
-		correct: 2,
+		correct: 3,
 	},
 	/*
     {
@@ -31,9 +31,9 @@ let score = Number(Charscore);
 let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
 let AnserQuestion = Number(CharAnserQuestion);
 let Right = 0;
-let QuizNumber = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+let QuizNumber = [0];
 let i = 0;
-const Questions = 3;
+const Questions = 1;
 const totalQuestion = localStorage.getItem("totalQuestion");
 document.getElementById("total-questions").textContent = AnserQuestion+1;
 
