@@ -1,27 +1,97 @@
 const quizData = [
 	{
-		question: "関白（かんぱく）の地位に就いた戦国武将は誰でしょう？",
+		question: "[ごめん　えきお君]ごめんえきお君は駅で働くひとがモチーフだよ.次のうちどれかな？",
 		choices: [
-			{ text: "織田信長" },
-			{ text: "豊臣秀吉" },
-			{ text: "徳川家康" },
-			{ text: "上杉謙信" },
+			{ text: "警察官さん" },
+			{ text: "駅員さん" },
+			{ text: "消防士さん" },
+			{ text: "運転手さん" },
 		],
 		correct: 1,
 	},
-	/*
-    {
-      question: "江戸幕府の初代将軍は誰ですか？",
-      choices: [
-        { text: "織田信長" },
-        { text: "豊臣秀吉" },
-        { text: "徳川家康" },
-        { text: "武田信玄" },
-      ],
-      correct: 2,
-    },
-    */
-	// 他の問題もここに追加
+
+	{
+		question: "[ごめん　まちこさん]今も高知を走っている路面電車には外国からきたものがあるんだどこの国から来たものかな？",
+		choices: [
+			{ text: "ポルトガル" },
+			{ text: "オーストラリア" },
+			{ text: "イギリス" },
+			{ text: "ドイツ" },
+		],
+		correct: 0,
+	},
+
+	{
+		question: "[たてだ　そらこちゃん]たてだ　そらこちゃんは働く女性がモチーフなんだ　どの職業がモチーフかな？",
+		choices: [
+			{ text: "秘書" },
+			{ text: "搭乗員" },
+			{ text: "事務員" },
+			{ text: "パティシエ" },
+		],
+		correct: 1,
+
+	},
+	
+	{
+		question: "[のいち　どんまん]のいちどんまんのモチーフになっているコンクールは次のうちどれかな？",
+		choices: [
+			{ text: "ちんどんコンクール" },
+			{ text: "どんちゃんコンクール" },
+			{ text: "しくしくコンクール" },
+			{ text: "ごろごろコンクール" },
+		],
+		correct: 0,
+		
+	},
+
+	{
+		question: "[よしかわ　うなお君]よしかわ　うなお君はとある魚がモチーフなんだ　次のうちどれかな？",
+		choices: [
+			{ text: "なまず" },
+			{ text: "うつぼ" },
+			{ text: "あなご" },
+			{ text: "うなぎ" },
+		],
+		correct: 3,
+		
+	},
+	
+	{
+		question: "[あかおか　えきんさん]えきんさんのモチーフ、弘瀬金蔵さんは通称でなんと呼ばれていたかな？？",
+		choices: [
+			{ text: "弘金" },
+			{ text: "絵金" },
+			{ text: "瀬金" },
+			{ text: "蔵金" },
+		],
+		correct: 1,
+		
+	},
+
+	{
+		question: "[かがみ　みかんちゃん]かがみ　みかんちゃんは高知県で人気のみかんがモチーフなんだ　次のうちどれかな？",
+		choices: [
+			{ text: "山南みかん" },
+			{ text: "川北みかん" },
+			{ text: "山北みかん" },
+			{ text: "川南みかん" },
+		],
+		correct: 2,
+		
+	},
+
+	{
+		question: "[やす　にんぎょちゃん]にんぎょちゃんのモチーフになっている「ミス・マーメイドコンテスト」はどこで開催されているかな？",
+		choices: [
+			{ text: "ヤ・スイパーク" },
+			{ text: "タ・スイパーク" },
+			{ text: "ヤ・シィパーク" },
+			{ text: "ス・ギィパーク" },
+		],
+		correct: 2,
+		
+	},
 ];
 
 let currentQuiz = quizData; // 全問題をそのまま使用
@@ -31,7 +101,7 @@ let score = Number(Charscore);
 let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
 let AnserQuestion = Number(CharAnserQuestion);
 let Right = 0;
-let QuizNumber = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+let QuizNumber = [0,1,2,3,4,5,6,7];
 let i = 0;
 const Questions = 3;
 const totalQuestion = localStorage.getItem("totalQuestion");
