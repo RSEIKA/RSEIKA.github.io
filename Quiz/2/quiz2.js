@@ -204,6 +204,8 @@ function nextQuestion() {
 		showResult();
 	}
 }
+//最終結果への遷移関数
+
 
 // 結果を表示
 function showResult() {
