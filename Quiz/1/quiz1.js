@@ -255,6 +255,16 @@ function nextQuestion() {
 	}
 }
 
+//最終結果への遷移関数
+function endCord(){
+	if(AnserQuestion == totalQuestion){
+		window.location.href = '../../clear.html'
+	}
+	else{
+		window.location.href = '../../newquiz.html'
+	}
+}
+
 // 結果を表示
 function showResult() {
 	document.getElementById("answer-section").style.display = "none";
