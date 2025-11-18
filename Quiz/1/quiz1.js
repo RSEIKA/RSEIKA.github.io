@@ -1,7 +1,7 @@
 let tokenizer;
 
 function initKuromojiAndQuiz() {
-  kuromoji.builder({ dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/" }).build(function(err, t) {
+  kuromoji.builder({ dicPath: "../../dict/" }).build(function(err, t) {
     if (err) {
       console.error(err);
       return;
