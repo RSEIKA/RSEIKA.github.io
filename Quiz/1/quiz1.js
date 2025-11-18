@@ -28,146 +28,36 @@ function addRuby(text) {
 
 const quizData = [
 	{
-		question: "[土佐打刃物タンちゃん]タンちゃんは高知の伝統工芸品のなにをモチーフにしているかな？",
+		question: "[しょうがちゃん]しょうがちゃんは、なに系アイドル？",
 		choices: [
-			{ text: "土佐打刃物" },
-			{ text: "土佐和紙" },
-			{ text: "土佐珊瑚" },
-			{ text: "土佐備長炭" },
+			{ text: "ツンデレ系" },
+			{ text: "清楚系" },
+			{ text: "地下茎" },
+			{ text: "王道系" },
 		],
-		correct: 0,
+		correct: 2,
 	},
 	
     {
-      question: "[フラフラ フラくん]フラくんは端午の節句に飾られる旗がモチーフなんだ　その旗の名前は次のうちどれかな？",
+      question: "[しょうが地蔵]しょうが地蔵はある一言でこころのとげを抜いてくれるんだ。どんな一言かな？",
       choices: [
-        { text: "フラフ" },
-        { text: "フランクフルト" },
-        { text: "フラフープ"},
-        { text: "フラミンゴ" },
-      ],
-      correct: 0,
-    },
-
-    {
-      question: "[瀧のシブキちゃん]瀧のシブキちゃんは香美市にある滝がモチーフなんだ　次のうちどれかな？",
-      choices: [
-        { text: "「轟の滝」と「大荒の滝」" },
-        { text: "「岩屋の滝」" },
-        { text: "「カツオのた滝」"},
-        { text: "「しら滝」" },
-      ],
-      correct: 0,
-    },
-    
-    {
-      question: "[あじさいひめ]あじさいひめはある花が道のように咲いている場所がモチーフなんだ　次のうちどれかな？",
-      choices: [
-        { text: "ひまわりロード" },
-        { text: "あさがおロード" },
-        { text: "あじさいロード"},
-        { text: "ゆりロード" },
-      ],
-      correct: 2,
-    },
-
-    {
-      question: "[かりかり　モモコちゃん]モモコちゃんは独特な食感の桃がモチーフなんだ　次のうちどれかな？",
-      choices: [
-        { text: "さくさく桃子" },
-        { text: "パリパリ桃子" },
-        { text: "ガリガリ桃子"},
-        { text: "かりかり桃子" },
-      ],
-      correct: 3,
-    },	
-
-    {
-      question: "[さくらてんし]さくらてんしはなにをモチーフにしているかな？",
-      choices: [
-        { text: "もも" },
-        { text: "さくらんぼ" },
-        { text: "うめ"},
-        { text: "さくら" },
+        { text: "ありがとう" },
+        { text: "だいすき" },
+        { text: "愛してる" },
+        { text: "ごめん" },
       ],
       correct: 3,
     },
 
-    {
-      question: "[しいたけ　たけちゃん]たけちゃんはなにをモチーフにしているかな？",
+	{
+      question: "[ありがとう駅のせんべちゃん]せんべちゃんはやなせたかし先生のアドバイスから生まれた煎餅がモチーフなんだ　次のうちどれかな？",
       choices: [
-        { text: "菌床しめじ" },
-        { text: "菌床エリンギ" },
-        { text: "菌床なめこ"},
-        { text: "菌床しいたけ" },
-      ],
-      correct: 3,
-    },		
-	
-    {
-      question: "[ぎんなん　ぎんちゃん]ぎんちゃんはなにをモチーフにしているかな？",
-      choices: [
-        { text: "ちゃわんむし" },
-        { text: "たまごやき" },
-        { text: "ぎんなん"},
-        { text: "まんじゅう" },
-      ],
-      correct: 2,
-    },	
-
-    {
-      question: "[龍河洞リューくん]リューくんの体温は龍河洞と同じなんだ　リューくんの体温は次のうちどれかな？",
-      choices: [
-        { text: "１００℃" },
-        { text: "１６℃" },
-        { text: "３６．５℃"},
-        { text: "２７３℃" },
+        { text: "ごめん煎餅" },
+        { text: "ありがとう煎餅" },
+        { text: "おろししょうが煎餅" },
+        { text: "豚の生姜焼き煎餅" },
       ],
       correct: 1,
-    },
-
-    {
-      question: "[ゆずぼうや]ゆずぼうやのモチーフにしているかな",
-      choices: [
-        { text: "ぶんたん" },
-        { text: "こなつ" },
-        { text: "ゆず"},
-        { text: "直七" },
-      ],
-      correct: 2,
-    },
-
-    {
-      question: "[さんれい　さんちゃん]さんちゃんのモチーフになったおやまの名前は次のうちどれかな？",
-      choices: [
-        { text: "おれい" },
-        { text: "さんれい" },
-        { text: "かれい"},
-        { text: "しれい" },
-      ],
-      correct: 1,
-    },
-
-    {
-      question: "[物部アユちゃん]物部アユちゃんのモチーフになっている魚の名前は次のうちどれかな？",
-      choices: [
-        { text: "カツオ" },
-        { text: "さば" },
-        { text: "アユ"},
-        { text: "しらす" },
-      ],
-      correct: 2,
-    },
-
-    {
-      question: "[森のモリくん]森のモリくんは西熊サオリガ原にある大きな木がモチーフなんだ　次のうちどれかな？",
-      choices: [
-        { text: "「イヌザクラ」と「トチノキ」" },
-        { text: "「ネコザクラ」と「キノチト」" },
-        { text: "「ケヤキ」と「ブナ」"},
-        { text: "「スギ」と「ヒノキ」" },
-      ],
-      correct: 0,
     },
 	// 他の問題もここに追加
 ];
@@ -178,7 +68,7 @@ let score = Number(Charscore);
 let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
 let AnserQuestion = Number(CharAnserQuestion);
 let Right = 0;
-let QuizNumber = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+let QuizNumber = [0,1,2];
 let i = 0;
 const Questions = 3;
 const totalQuestion = localStorage.getItem("totalQuestion");
