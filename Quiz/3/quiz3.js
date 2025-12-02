@@ -1,29 +1,43 @@
+let tokenizer;
+
+function initKuromojiAndQuiz() {
+  kuromoji.builder({ dicPath: "../../dict/" }).build(function(err, t) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    tokenizer = t;
+    console.log("Kuromoji ready ✅");
+
+    // Kuromoji 初期化後にクイズを開始
+    loadQuestion();
+  });
+}
+// ルビ付け関数
+function addRuby(text) {
+  if (!tokenizer) return text;
+  const tokens = tokenizer.tokenize(text);
+  return tokens.map(token => {
+    if (token.reading && token.surface_form !== token.reading) {
+      return `<ruby>${token.surface_form}<rt>${token.reading}</rt></ruby>`;
+    } else {
+      return token.surface_form;
+    }
+  }).join('');
+}
+
 const quizData = [
 	{
-		question: "[カミーティア]夜に見える星はどれくらい明るく光っているかによって等級が変わるんだ一番上の等級は次のうちどれかな？",
+		question: "[しょうがちゃん]しょうがちゃんは、なに系アイドル？",
 		choices: [
-			{ text: "1等星" },
-			{ text: "2等星" },
-			{ text: "6等星" },
-			{ text: "0等星" },
+			{ text: "ツンデレ系" },
+			{ text: "清楚系" },
+			{ text: "地下茎" },
+			{ text: "王道系" },
 		],
-		correct: 3,
+		correct: 2,
 	},
-	/*
-    {
-      question: "江戸幕府の初代将軍は誰ですか？",
-      choices: [
-        { text: "織田信長" },
-        { text: "豊臣秀吉" },
-        { text: "徳川家康" },
-        { text: "武田信玄" },
-      ],
-      correct: 2,
-    },
-    */
-	// 他の問題もここに追加
 ];
-
 let currentQuiz = quizData; // 全問題をそのまま使用
 let currentQuestion = 0;
 let Charscore = localStorage.getItem("score") || 0;
@@ -31,52 +45,36 @@ let score = Number(Charscore);
 let CharAnserQuestion = localStorage.getItem("AnserQuestion") || 0;
 let AnserQuestion = Number(CharAnserQuestion);
 let Right = 0;
-let QuizNumber = [0];
+let QuizNumber = [0,1,2];
 let i = 0;
-const Questions = 1;
+const Questions = 3;
 const totalQuestion = localStorage.getItem("totalQuestion");
-document.getElementById("total-questions").textContent = AnserQuestion+1;
-
 // 初期化
-function initQuiz() {
-	currentQuestion = 0; // 問題番号の初期化
-	//score = 0; // スコアの初期化
-	var Q = QuizNumber.length;
-	while (Q) {
-    var j = Math.floor( Math.random() * Q );
-    var t = QuizNumber[--Q];
-    QuizNumber[Q] = QuizNumber[j];
-    QuizNumber[j] = t;
-	}
-	loadQuestion();
-}
 
 // 問題と選択肢を表示
 function loadQuestion() {
-	document.getElementById("quiz-container").style.display = "block";
-	document.getElementById("answer-section").style.display = "none";
-	document.getElementById("final-result").style.display = "none";
+  document.getElementById("quiz-container").style.display = "block";
+  document.getElementById("answer-section").style.display = "none";
+  document.getElementById("final-result").style.display = "none";
 
-	// 問題番号を表示
-	/*document.getElementById("question-number").textContent = `第 ${
-      currentQuestion + 1
-    } 問`;*/
+  const questionData = quizData[i];
 
-	const questionData = currentQuiz[QuizNumber[i]];
+  // 問題文にルビを付けて表示
+  document.getElementById("question").innerHTML = addRuby(questionData.question);
 
-	document.getElementById("question").textContent = questionData.question;
-	const choicesContainer = document.getElementById("choices-container");
-	choicesContainer.innerHTML = "";
-
-	// 選択肢に番号を付ける
-	questionData.choices.forEach((choice, index) => {
-		const choiceDiv = document.createElement("div");
-		choiceDiv.classList.add("choice");
-		choiceDiv.textContent = `${index + 1}. ${choice.text}`; // 番号付きの選択肢
-		choiceDiv.onclick = () => checkAnswer(index, questionData);
-		choicesContainer.appendChild(choiceDiv);
-	});
+  // 選択肢表示
+  const choicesContainer = document.getElementById("choices-container");
+  choicesContainer.innerHTML = "";
+  questionData.choices.forEach((choice, index) => {
+    const choiceDiv = document.createElement("div");
+    choiceDiv.classList.add("choice");
+    // ここを変更：textContent -> innerHTML にして addRuby() の結果を入れる
+    choiceDiv.innerHTML = `${index + 1}. ${addRuby(choice.text)}`;
+    choiceDiv.onclick = () => checkAnswer(index, questionData);
+    choicesContainer.appendChild(choiceDiv);
+  });
 }
+
 
 // 答えを確認
 function checkAnswer(selected, questionData) {
@@ -89,13 +87,13 @@ function checkAnswer(selected, questionData) {
 
 	// 正解・不正解のメッセージ表示
 	if (selected === questionData.correct) {
-		resultText.innerHTML = "<span class='correct'>正解！</span>";
+		resultText.innerHTML = "<span class='correct'> <ruby>正解<rt>せいかい</rt></ruby>！</span>";
 		//score++;
 		Right++;
 		//localStorage.setItem("score", score);
 
 	} else {
-		resultText.innerHTML = "<span class='wrong'>不正解です。</span>";
+		resultText.innerHTML = "<span class='wrong'><ruby>不正解<rt>ふせいかい</rt></ruby>です。</span>";
 		localStorage.setItem("score", score);
 	}
 	//currentQuestion++;
@@ -110,17 +108,21 @@ function checkAnswer(selected, questionData) {
 			bit = bit+4;
 			localStorage.setItem("bit", bit);
 		}
-		document.getElementById("next-question").textContent = "結果を見る";
+		document.getElementById("next-question").innerHTML = `
+        <ruby>結果<rt>けっか</rt></ruby>を<ruby>見る<rt>み</rt></ruby>
+    `;
 		setTimeout(() =>{
 			const button = document.getElementById("next-question");
 			button.click();
-		},3000);
+		},5000);
 	} else {
-		document.getElementById("next-question").textContent = "次の問題";
+		document.getElementById("next-question").innerHTML = `
+        <ruby>次<rt>つぎ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
+    `;
 		setTimeout(() =>{
 			const button = document.getElementById("next-question");
 			button.click();
-		},3000);
+		},5000);
 	}
 }
 
@@ -155,15 +157,61 @@ function showResult() {
 			setTimeout(() =>{
 			const button = document.getElementById("restart-quiz");
 			button.click();
-		},3000);
+		},5000);
 }
 
-// もう一度遊ぶ
-/*function restartQuiz() {
-    currentQuestion = 0;
-    score = 0;
-    initQuiz();
-  }*/
 
-// クイズ開始
-initQuiz();
+window.onload = () => {
+  initKuromojiAndQuiz();
+};
+// ---------- 補助: カタカナ -> ひらがな ----------
+function katakanaToHiragana(str) {
+  // カタカナ（U+30A1 .. U+30F3）をひらがな（U+3041 .. U+3093）に変換。
+  // 長音符（ー U+30FC）などはそのまま残す。
+  return Array.from(str).map(ch => {
+    const code = ch.charCodeAt(0);
+    // カタカナ範囲のうち対応するひらがながあるコードだけ変換
+    if (code >= 0x30A1 && code <= 0x30F3) {
+      return String.fromCharCode(code - 0x60);
+    }
+    return ch;
+  }).join('');
+}
+
+// ---------- ルビ付け関数（漢字のみ、ひらがな表記のルビ） ----------
+function addRuby(text) {
+  if (!tokenizer) return text;
+
+  const tokens = tokenizer.tokenize(text);
+
+  return tokens.map(token => {
+    const surface = token.surface_form;
+
+    // 1) surface に漢字（Han script）が含まれるか判定（Unicodeプロパティを使用）
+    const hasKanji = /\p{Script=Han}/u.test(surface);
+
+    // 2) 読みが存在するか、かつ表層と異なる場合
+    const reading = token.reading || "";
+    const hasReading = reading.length > 0 && reading !== surface;
+
+    if (hasKanji && hasReading) {
+      // kuromoji の reading はカタカナなのでひらがなに変換
+      const hira = katakanaToHiragana(reading);
+      return `<ruby>${escapeHtml(surface)}<rt>${escapeHtml(hira)}</rt></ruby>`;
+    } else {
+      // 漢字を含まない、または読みが無い／同じならそのまま返す
+      return escapeHtml(surface);
+    }
+  }).join('');
+}
+
+// 必要ならHTMLエスケープ（トークンに <> 等が入る可能性を防ぐ）
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[c]);
+}
