@@ -1,51 +1,48 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クイズ3</title>
-    <link rel="stylesheet" href="quiz3.css">
-    <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クイズ1</title>
+  <link rel="stylesheet" href="quiz3.css">
+  <!-- kuromoji CDN -->
+<script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js"></script>
   <script src="quiz3.js" defer></script>
+
 </head>
-
 <body>
+  <div class="container" id="container">
+    <div class="quiz-info">Q<span id="total-questions">1</span></div>
+    <h1>クイズ</h1>
 
-    <div class="container" id="container">
-        
-        <!-- 全問題数表示 -->
-        <div class="quiz-info">
-            Q<span id="total-questions"></span> 
-        </div>
-
-
-        <h1>クイズ</h1>
-
-        <div class="quiz-container" id="quiz-container">
-            <div class="question-number" id="question-number"></div>
-            <div class="question" id="question"></div>
-            <div class="grid-container" id="choices-container"></div>
-        </div>
-
-        <div class="result-section" id="answer-section">
-            <h2>回答結果</h2>
-            <p id="answer-result"></p>
-            <div id="next-question" onclick="nextQuestion()">次の問題へ</div>
-        </div>
-
-        <div id="final-result" class="final-section">
-            <h2>最終結果</h2>
-            <p id="score"></p>
-            <div id="restart-quiz" onclick="endCord()">ARに戻る
-            </div>
-        </div>
+    <div class="quiz-container" id="quiz-container">
+      <div class="question-number" id="question-number"></div>
+      <div class="question" id="question"></div>
+      <div class="grid-container" id="choices-container"></div>
     </div>
 
-    <!-- 先に問題ファイルを読み込む -->
-    <script src="quiz3.js"></script>
-    <!-- 次にメインのスクリプトを読み込む -->
-    <script src="quiz3.js"></script>
-</body>
+    <div class="result-section" id="answer-section">
+      <h2> 
+      <ruby>回答<rt>かいとう</rt></ruby>
+      <ruby>結果<rt>けっか</rt></ruby>
+      </h2>
+      <p id="answer-result"></p>
+      <div id="next-question" onclick="nextQuestion()">
+        <ruby>次<rt>つぎ</rt></ruby>の
+        <ruby>問題<rt>もんだい</rt></ruby>へ
+    </div>
+    </div>
 
+    <div id="final-result" class="final-section">
+      <h2>
+      <ruby>最終<rt>さいしゅう</rt></ruby>
+      <ruby>結果<rt>けっか</rt></ruby>
+      </h2>
+      <p id="score"></p>
+      <div id="restart-quiz" onclick="endCord()">ARに<ruby>戻<rt>もど</rt></ruby>る
+    </div>
+  </div>
+
+  <!-- quiz1.js は kuromoji の読み込み後に defer で呼ぶ -->
+</body>
 </html>
