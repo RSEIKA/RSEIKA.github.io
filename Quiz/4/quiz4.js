@@ -26,7 +26,7 @@ function addRuby(text) {
   }).join('');
 }
 
-const quizData = [
+const quizData4 = [
 	{
       question: "[ありがとう駅のせんべちゃん]せんべちゃんはやなせたかし先生のアドバイスから生まれた煎餅がモチーフなんだ　次のうちどれかな？",
       choices: [

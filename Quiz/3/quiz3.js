@@ -26,7 +26,7 @@ function addRuby(text) {
   }).join('');
 }
 
-const quizData = [
+const quizData3 = [
 	{
 		question: "[しょうがちゃん]しょうがちゃんは、なに系アイドル？",
 		choices: [
