@@ -38,7 +38,7 @@ const quizData3 = [
 		correct: 2,
 	},
 ];
-let currentQuiz = quizData; // 全問題をそのまま使用
+let currentQuiz = quizData3; // 全問題をそのまま使用
 let currentQuestion = 0;
 let Charscore = localStorage.getItem("score") || 0;
 let score = Number(Charscore);

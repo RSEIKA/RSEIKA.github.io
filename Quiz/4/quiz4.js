@@ -39,7 +39,7 @@ const quizData4 = [
     },
 	// 他の問題もここに追加
 ];
-let currentQuiz = quizData; // 全問題をそのまま使用
+let currentQuiz = quizData4; // 全問題をそのまま使用
 let currentQuestion = 0;
 let Charscore = localStorage.getItem("score") || 0;
 let score = Number(Charscore);

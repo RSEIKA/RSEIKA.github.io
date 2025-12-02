@@ -26,7 +26,7 @@ function addRuby(text) {
   }).join('');
 }
 
-const quizData2 = [
+const quizData = [
     {
       question: "[しょうが地蔵]しょうが地蔵はある一言でこころのとげを抜いてくれるんだ。どんな一言かな？",
       choices: [
