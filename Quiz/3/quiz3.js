@@ -25,7 +25,7 @@ function addRuby(text) {
   }).join('');
 }
 
-const quizData3 = [
+const quizData = [
 	{
 		question: "[しょうがちゃん]しょうがちゃんは、なに系アイドル？",
 		choices: [
@@ -37,7 +37,7 @@ const quizData3 = [
 		correct: 2,
 	},
 ];
-let currentQuiz = quizData3; // 全問題をそのまま使用
+let currentQuiz = quizData; // 全問題をそのまま使用
 let currentQuestion = 0;
 let Charscore = localStorage.getItem("score") || 0;
 let score = Number(Charscore);
@@ -46,7 +46,7 @@ let AnserQuestion = Number(CharAnserQuestion);
 let Right = 0;
 let QuizNumber = [0,1,2];
 let i = 0;
-const Questions = 3;
+const Questions = 1;
 const totalQuestion = localStorage.getItem("totalQuestion");
 // 初期化
 
@@ -214,4 +214,6 @@ function escapeHtml(s) {
     "'": '&#39;'
   })[c]);
 }
+window.nextQuestion = nextQuestion;
+window.endCord = endCord;
 })();
