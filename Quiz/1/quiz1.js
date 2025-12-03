@@ -1,5 +1,5 @@
 let tokenizer;
-
+(function(){
 function initKuromojiAndQuiz() {
   kuromoji.builder({ dicPath: "../../dict/" }).build(function(err, t) {
     if (err) {
@@ -238,3 +238,6 @@ function escapeHtml(s) {
     "'": '&#39;'
   })[c]);
 }
+window.nextQuestion = nextQuestion;
+window.endCord = endCord;
+})();
