@@ -60,6 +60,8 @@ marker04.addEventListener('markerFound', () => {
   window.location.href = './Quiz/4/quiz4.html'
   }
 });
+//画像表示
+
 
 
 
