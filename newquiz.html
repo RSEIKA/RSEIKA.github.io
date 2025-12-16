@@ -136,7 +136,23 @@
         font-family: sans-serif;
       }
       /*画像ボックス*/
-      
+      #ImagesBox{
+        position: fixed;
+        z-index: 9999;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #FFF;
+        text-align: center;
+        padding: 5px;
+        top: 70%;
+        right: 10px;
+        width: 170;
+        height: 200;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
       
     </style>
   </head>
@@ -148,7 +164,11 @@
     </div>-->
     <!-- 回答数の表示 -->
     <div id="answeredCount">
-   <div>Answer<br><span id="answeredValue"></span></div>
+      <div>Answer<br><span id="answeredValue"></span></div>
+    </div>
+    <!--次の画像を表示-->
+    <div id="ImagesBox">
+      <div>この画像を探そう!<br><img id="Images" src="./images/marker/pattern-senbeityan.png" width="150" height="150"></div>
    </div>
 
     <script>
