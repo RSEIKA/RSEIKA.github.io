@@ -61,6 +61,17 @@ marker04.addEventListener('markerFound', () => {
   }
 });
 
+//画像表示
+if(!checkanswered(1,bit)){
+  document.getElementById("Images").src="./images/marker/pattern-yanaseraion.png"
+}else if(!checkanswered(2,bit)){
+  document.getElementById("Images").src="./images/marker/pattern-syougajizou.png"
+}else if(!checkanswered(3,bit)){
+  document.getElementById("Images").src="./images/marker/pattern-syougatyan.png"
+}else if(!checkanswered(4,bit)){
+  document.getElementById("Images").src="./images/marker/pattern-senbeityan.png"
+}
+
 
 
 //答えてるか関数
