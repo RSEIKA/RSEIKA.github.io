@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-size: cover;
+    background-image: url("./../gaikan.png");
     display: flex;
     justify-content: center;
     align-items: center;
