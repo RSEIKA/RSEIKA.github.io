@@ -27,7 +27,7 @@ function addRuby(text) {
 
 const quizData = [
     {
-      question: "[しょうが地蔵]しょうが地蔵はある一言でこころのとげを抜いてくれるんだ。どんな一言かな？",
+      question: "[ごめん生姜地蔵]ごめん生姜地蔵はある一言でこころのとげを抜いてくれるんだ。どんな一言かな？",
       choices: [
         { text: "ありがとう" },
         { text: "だいすき" },
