@@ -1,12 +1,12 @@
 @charset "UTF-8";
 h1 {
-	font-size:40px;
+	font-size:80px;
 }
 p{
-	font-size:20px;
+	font-size:40px;
 }
 button{
-	font-size:20px;
+	font-size:40px;
 }
 div{
 	text-align:center;
