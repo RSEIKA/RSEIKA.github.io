@@ -180,6 +180,7 @@ function katakanaToHiragana(str) {
 }
 
 // ---------- ルビ付け関数（漢字のみ、ひらがな表記のルビ） ----------
+// ---------- ルビ付け関数（漢字部分のみに限定） ----------
 function addRuby(text) {
   if (!tokenizer) return text;
 
@@ -187,22 +188,28 @@ function addRuby(text) {
 
   return tokens.map(token => {
     const surface = token.surface_form;
+    const readingRaw = token.reading ? katakanaToHiragana(token.reading) : "";
 
-    // 1) surface に漢字（Han script）が含まれるか判定（Unicodeプロパティを使用）
-    const hasKanji = /\p{Script=Han}/u.test(surface);
-
-    // 2) 読みが存在するか、かつ表層と異なる場合
-    const reading = token.reading || "";
-    const hasReading = reading.length > 0 && reading !== surface;
-
-    if (hasKanji && hasReading) {
-      // kuromoji の reading はカタカナなのでひらがなに変換
-      const hira = katakanaToHiragana(reading);
-      return `<ruby>${escapeHtml(surface)}<rt>${escapeHtml(hira)}</rt></ruby>`;
-    } else {
-      // 漢字を含まない、または読みが無い／同じならそのまま返す
+    // 漢字が含まれていない、または読みがない場合はそのまま返す
+    if (!/\p{Script=Han}/u.test(surface) || !readingRaw || surface === readingRaw) {
       return escapeHtml(surface);
     }
+
+    // --- ここから「送り仮名」を分離する最小限の処理 ---
+    let s = surface.length - 1;
+    let r = readingRaw.length - 1;
+
+    // お尻の文字が一致している間（送り仮名）は、ルビに含めないように削る
+    while (s >= 0 && r >= 0 && surface[s] === readingRaw[r] && !/\p{Script=Han}/u.test(surface[s])) {
+      s--;
+      r--;
+    }
+
+    const kanjiPart = surface.substring(0, s + 1);
+    const readingPart = readingRaw.substring(0, r + 1);
+    const okuriganaPart = surface.substring(s + 1);
+
+    return `<ruby>${escapeHtml(kanjiPart)}<rt>${escapeHtml(readingPart)}</rt></ruby>${escapeHtml(okuriganaPart)}`;
   }).join('');
 }
 
