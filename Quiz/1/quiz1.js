@@ -109,21 +109,10 @@ function checkAnswer(selected, questionData) {
 			bit = bit+1;
 			localStorage.setItem("bit", bit);
 		}
-		document.getElementById("next-question").innerHTML = `
-        <ruby>結果<rt>けっか</rt></ruby>を<ruby>見る<rt>み</rt></ruby>
-    `;
 		setTimeout(() =>{
-			const button = document.getElementById("next-question");
-			button.click();
-		},5000);
-	} else {
-		document.getElementById("next-question").innerHTML = `
-        <ruby>次<rt>つぎ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
-    `;
-		setTimeout(() =>{
-			const button = document.getElementById("next-question");
-			button.click();
-		},5000);
+      endCord();
+		},3000);
+
 	}
 }
 
