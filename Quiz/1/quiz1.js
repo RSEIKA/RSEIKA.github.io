@@ -139,13 +139,29 @@ function nextQuestion() {
 }
 
 //最終結果への遷移関数
-function endCord(){
-	if(AnserQuestion == totalQuestion){
-		window.location.href = '../../clear.html'
-	}
-	else{
-		window.location.href = '../../newquiz.html'
-	}
+// 最終結果への遷移関数
+function endCord() {
+  // --- カウント処理ここから ---
+  // 「nan-koku-quiz-2024」の部分を、自分だけの好きな英数字に変えてください（世界で重複しない名前）
+  const namespace = "kaiyoudou-quiz-2025"; 
+  const key = "clear_count";
+
+  // カウントを＋1する命令を送る
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("現在の累計:", data.value);
+    })
+    .catch(err => console.error("カウントエラー:", err))
+    .finally(() => {
+      // カウントが終わった（あるいはエラーになった）後に画面を飛ばす
+      if (AnserQuestion == totalQuestion) {
+        window.location.href = '../../clear.html';
+      } else {
+        window.location.href = '../../newquiz.html';
+      }
+    });
+  // --- カウント処理ここまで ---
 }
 
 // 結果を表示
