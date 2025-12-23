@@ -139,13 +139,18 @@ function nextQuestion() {
 }
 
 //最終結果への遷移関数
-function endCord(){
-	if(AnserQuestion == totalQuestion){
-		window.location.href = '../../clear.html'
-	}
-	else{
-		window.location.href = '../../newquiz.html'
-	}
+function endCord() {
+  const gasUrl = "https://script.google.com/macros/s/AKfycby-9lUW73-r32G7pmNsPAkSIz6yR6bDBGk3S5HNbnXuvWbWJcjm97tMQKdXlF8sYXN3/exec";
+
+  if (AnserQuestion == totalQuestion) {
+    // A: クリア画面に行くときだけカウントする
+    fetch(gasUrl).finally(() => {
+      window.location.href = '../../clear.html';
+    });
+  } else {
+    // B: クリアじゃないときはカウントせずに移動だけ
+    window.location.href = '../../newquiz.html';
+  }
 }
 
 // 結果を表示
