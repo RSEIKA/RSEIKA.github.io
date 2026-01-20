@@ -125,16 +125,24 @@ function nextQuestion() {
 	}
 }
 
-//最終結果への遷移関数
-function endCord(){
-	if(AnserQuestion == totalQuestion){
-		window.location.href = '../../clear.html'
-	}
-	else{
-		window.location.href = '../../newquiz.html'
-	}
+let isSending = false; // 送信中フラグ
+
+function endCord() {
+  if (isSending) return; // すでに送信中なら何もしない
+  isSending = true;      // 送信開始！
+
+  const gasUrl = "https://script.google.com/macros/s/AKfycby-9lUW73-r32G7pmNsPAkSIz6yR6bDBGk3S5HNbnXuvWbWJcjm97tMQKdXlF8sYXN3/exec";
+
+  if (AnserQuestion == totalQuestion) {
+    fetch(gasUrl).finally(() => {
+      window.location.href = '../../clear.html';
+    });
+  } else {
+    window.location.href = '../../newquiz.html';
+  }
 }
 
+//最終結果への遷移関数
 // 結果を表示
 function showResult() {
 	document.getElementById("answer-section").style.display = "none";

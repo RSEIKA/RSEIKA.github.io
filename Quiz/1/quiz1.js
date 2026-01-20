@@ -128,16 +128,19 @@ function nextQuestion() {
 }
 
 //最終結果への遷移関数
+let isSending = false; // 送信中フラグ
+
 function endCord() {
+  if (isSending) return; // すでに送信中なら何もしない
+  isSending = true;      // 送信開始！
+
   const gasUrl = "https://script.google.com/macros/s/AKfycby-9lUW73-r32G7pmNsPAkSIz6yR6bDBGk3S5HNbnXuvWbWJcjm97tMQKdXlF8sYXN3/exec";
 
   if (AnserQuestion == totalQuestion) {
-    // A: クリア画面に行くときだけカウントする
     fetch(gasUrl).finally(() => {
       window.location.href = '../../clear.html';
     });
   } else {
-    // B: クリアじゃないときはカウントせずに移動だけ
     window.location.href = '../../newquiz.html';
   }
 }

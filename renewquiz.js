@@ -2,7 +2,7 @@ if (!sessionStorage.getItem('initialized')) {
   localStorage.setItem("bit", 0);
   localStorage.setItem("score", 0);
   localStorage.setItem("totalQuestion",4);
-  localStorage.setItem("AnserQuestion",0);
+  localStorage.setItem("AnserQuestion",3);
   sessionStorage.setItem('initialized', 'true');
 }
 const marker01 = document.querySelector('#marker01');
