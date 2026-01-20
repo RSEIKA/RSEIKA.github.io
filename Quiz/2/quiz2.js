@@ -108,9 +108,21 @@ function checkAnswer(selected, questionData) {
 			bit = bit+2;
 			localStorage.setItem("bit", bit);
 		}
+		document.getElementById("next-question").innerHTML = `
+        <ruby>結果<rt>けっか</rt></ruby>を<ruby>見る<rt>み</rt></ruby>
+    `;
 		setTimeout(() =>{
-      endCord();
-		},3000);
+			const button = document.getElementById("next-question");
+			button.click();
+		},5000);
+	} else {
+		document.getElementById("next-question").innerHTML = `
+        <ruby>次<rt>つぎ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
+    `;
+		setTimeout(() =>{
+			const button = document.getElementById("next-question");
+			button.click();
+		},5000);
 	}
 }
 
@@ -126,13 +138,21 @@ function nextQuestion() {
 }
 
 //最終結果への遷移関数
-function endCord(){
-	if(AnserQuestion == totalQuestion){
-		window.location.href = '../../clear.html'
-	}
-	else{
-		window.location.href = '../../newquiz.html'
-	}
+let isSending = false; // 送信中フラグ
+
+function endCord() {
+  if (isSending) return; // すでに送信中なら何もしない
+  isSending = true;      // 送信開始！
+
+  const gasUrl = "https://script.google.com/macros/s/AKfycby-9lUW73-r32G7pmNsPAkSIz6yR6bDBGk3S5HNbnXuvWbWJcjm97tMQKdXlF8sYXN3/exec";
+
+  if (AnserQuestion == totalQuestion) {
+    fetch(gasUrl).finally(() => {
+      window.location.href = '../../clear.html';
+    });
+  } else {
+    window.location.href = '../../newquiz.html';
+  }
 }
 
 // 結果を表示
