@@ -75,9 +75,7 @@ hr {
 a {
 	font-weight: normal;
 }
-aside{
 
-}
 #middle-inner {
 	padding: 20px 0 20px 0;
 }
@@ -128,15 +126,12 @@ blockquote {
     margin: 0;
 	width: 100%;
 }
-header {
 
-}
 #head-inner {
     padding: 25px 10px;
 	background-color: #FFFFFF;
 }
-.description {
-}
+
 #content-wrapper {
 margin: 0;
 	width: 100%;}
