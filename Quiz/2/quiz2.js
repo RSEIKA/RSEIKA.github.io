@@ -13,17 +13,6 @@ function initKuromojiAndQuiz() {
   });
 }
 // ルビ付け関数
-function addRuby(text) {
-  if (!tokenizer) return text;
-  const tokens = tokenizer.tokenize(text);
-  return tokens.map(token => {
-    if (token.reading && token.surface_form !== token.reading) {
-      return `<ruby>${token.surface_form}<rt>${token.reading}</rt></ruby>`;
-    } else {
-      return token.surface_form;
-    }
-  }).join('');
-}
 
 const quizData = [
     {
@@ -174,11 +163,10 @@ window.onload = () => {
 };
 // ---------- 補助: カタカナ -> ひらがな ----------
 function katakanaToHiragana(str) {
-  // カタカナ（U+30A1 .. U+30F3）をひらがな（U+3041 .. U+3093）に変換。
-  // 長音符（ー U+30FC）などはそのまま残す。
+  if (!str) return "";
   return Array.from(str).map(ch => {
     const code = ch.charCodeAt(0);
-    // カタカナ範囲のうち対応するひらがながあるコードだけ変換
+    // カタカナの範囲内であればひらがなへ変換
     if (code >= 0x30A1 && code <= 0x30F3) {
       return String.fromCharCode(code - 0x60);
     }
@@ -186,7 +174,7 @@ function katakanaToHiragana(str) {
   }).join('');
 }
 
-// ---------- ルビ付け関数（漢字のみ、ひらがな表記のルビ） ----------
+// ---------- ルビ付け関数（漢字が含まれる場合のみ） ----------
 function addRuby(text) {
   if (!tokenizer) return text;
 
@@ -194,20 +182,32 @@ function addRuby(text) {
 
   return tokens.map(token => {
     const surface = token.surface_form;
+    const reading = token.reading;
 
-    // 1) surface に漢字（Han script）が含まれるか判定（Unicodeプロパティを使用）
-    const hasKanji = /\p{Script=Han}/u.test(surface);
+    // 漢字が含まれているかチェック
+    if (/[一-龠々]/.test(surface) && reading) {
+      let hira = katakanaToHiragana(reading);
+      
+      // 送り仮名（単語の終わりの方のひらがな）をルビの外に出す処理
+      let s = surface;
+      let r = hira;
+      
+      // 末尾から1文字ずつ比較し、共通するひらがながあれば切り離す
+      while (
+        s.length > 1 && 
+        r.length > 1 && 
+        s.slice(-1) === r.slice(-1) && 
+        !/[一-龠々]/.test(s.slice(-1)) // 末尾が漢字じゃない場合のみ
+      ) {
+        s = s.slice(0, -1);
+        r = r.slice(0, -1);
+      }
 
-    // 2) 読みが存在するか、かつ表層と異なる場合
-    const reading = token.reading || "";
-    const hasReading = reading.length > 0 && reading !== surface;
-
-    if (hasKanji && hasReading) {
-      // kuromoji の reading はカタカナなのでひらがなに変換
-      const hira = katakanaToHiragana(reading);
-      return `<ruby>${escapeHtml(surface)}<rt>${escapeHtml(hira)}</rt></ruby>`;
+      // 共通部分を切り離した後の残り（漢字部分）にだけルビを振る
+      const suffix = surface.slice(s.length);
+      return `<ruby>${escapeHtml(s)}<rt>${escapeHtml(r)}</rt></ruby>${escapeHtml(suffix)}`;
     } else {
-      // 漢字を含まない、または読みが無い／同じならそのまま返す
+      // 漢字がない場合はそのまま
       return escapeHtml(surface);
     }
   }).join('');

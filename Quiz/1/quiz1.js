@@ -14,17 +14,6 @@ function initKuromojiAndQuiz() {
   });
 }
 // ルビ付け関数
-function addRuby(text) {
-  if (!tokenizer) return text;
-  const tokens = tokenizer.tokenize(text);
-  return tokens.map(token => {
-    if (token.reading && token.surface_form !== token.reading) {
-      return `<ruby>${token.surface_form}<rt>${token.reading}</rt></ruby>`;
-    } else {
-      return token.surface_form;
-    }
-  }).join('');
-}
 
 const quizData = [
 	{
@@ -32,7 +21,7 @@ const quizData = [
 		choices: [
 			{ text: "なんこく町" },
 			{ text: "あんぱん町" },
-			{ text: "御免町" },
+			{ text: "ごめん町" },
 			{ text: "ばいきん町" },
 		],
 		correct: 2,
@@ -164,11 +153,10 @@ window.onload = () => {
 };
 // ---------- 補助: カタカナ -> ひらがな ----------
 function katakanaToHiragana(str) {
-  // カタカナ（U+30A1 .. U+30F3）をひらがな（U+3041 .. U+3093）に変換。
-  // 長音符（ー U+30FC）などはそのまま残す。
+  if (!str) return "";
   return Array.from(str).map(ch => {
     const code = ch.charCodeAt(0);
-    // カタカナ範囲のうち対応するひらがながあるコードだけ変換
+    // カタカナの範囲内であればひらがなへ変換
     if (code >= 0x30A1 && code <= 0x30F3) {
       return String.fromCharCode(code - 0x60);
     }
@@ -176,8 +164,7 @@ function katakanaToHiragana(str) {
   }).join('');
 }
 
-// ---------- ルビ付け関数（漢字のみ、ひらがな表記のルビ） ----------
-// ---------- ルビ付け関数（漢字部分のみに限定） ----------
+// ---------- ルビ付け関数（漢字が含まれる場合のみ） ----------
 function addRuby(text) {
   if (!tokenizer) return text;
 
@@ -185,31 +172,36 @@ function addRuby(text) {
 
   return tokens.map(token => {
     const surface = token.surface_form;
-    const readingRaw = token.reading ? katakanaToHiragana(token.reading) : "";
+    const reading = token.reading;
 
-    // 漢字が含まれていない、または読みがない場合はそのまま返す
-    if (!/\p{Script=Han}/u.test(surface) || !readingRaw || surface === readingRaw) {
+    // 漢字が含まれているかチェック
+    if (/[一-龠々]/.test(surface) && reading) {
+      let hira = katakanaToHiragana(reading);
+      
+      // 送り仮名（単語の終わりの方のひらがな）をルビの外に出す処理
+      let s = surface;
+      let r = hira;
+      
+      // 末尾から1文字ずつ比較し、共通するひらがながあれば切り離す
+      while (
+        s.length > 1 && 
+        r.length > 1 && 
+        s.slice(-1) === r.slice(-1) && 
+        !/[一-龠々]/.test(s.slice(-1)) // 末尾が漢字じゃない場合のみ
+      ) {
+        s = s.slice(0, -1);
+        r = r.slice(0, -1);
+      }
+
+      // 共通部分を切り離した後の残り（漢字部分）にだけルビを振る
+      const suffix = surface.slice(s.length);
+      return `<ruby>${escapeHtml(s)}<rt>${escapeHtml(r)}</rt></ruby>${escapeHtml(suffix)}`;
+    } else {
+      // 漢字がない場合はそのまま
       return escapeHtml(surface);
     }
-
-    // --- ここから「送り仮名」を分離する最小限の処理 ---
-    let s = surface.length - 1;
-    let r = readingRaw.length - 1;
-
-    // お尻の文字が一致している間（送り仮名）は、ルビに含めないように削る
-    while (s >= 0 && r >= 0 && surface[s] === readingRaw[r] && !/\p{Script=Han}/u.test(surface[s])) {
-      s--;
-      r--;
-    }
-
-    const kanjiPart = surface.substring(0, s + 1);
-    const readingPart = readingRaw.substring(0, r + 1);
-    const okuriganaPart = surface.substring(s + 1);
-
-    return `<ruby>${escapeHtml(kanjiPart)}<rt>${escapeHtml(readingPart)}</rt></ruby>${escapeHtml(okuriganaPart)}`;
   }).join('');
 }
-
 // 必要ならHTMLエスケープ（トークンに <> 等が入る可能性を防ぐ）
 function escapeHtml(s) {
   return s.replace(/[&<>"']/g, c => ({
