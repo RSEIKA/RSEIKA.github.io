@@ -16,7 +16,7 @@ function initKuromojiAndQuiz() {
 
 const quizData = [
 	{
-      question: "[ありがとう駅のせんべちゃん]せんべちゃんはどこの駅に住んでいるかな？",
+      question: "[ありがとう駅のセンベちゃん]センベちゃんはどこの駅に住んでいるかな？",
       choices: [
         { text: "こうち駅" },
         { text: "ありがとう駅" },
